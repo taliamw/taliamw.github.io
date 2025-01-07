@@ -1,0 +1,44 @@
+<div class="portfolio">
+    <br>
+    <h2 class="text-center blue-text">My Graphic Design Gallery</h2>
+
+    <!-- Gallery Section -->
+    <div class="gallery">
+        <?php
+        $folderPath = "../images/gallery/";
+        $images = glob($folderPath . "*.{jpg,jpeg,png,gif}", GLOB_BRACE); // Fetch images with common extensions
+        foreach ($images as $image) {
+            echo '<div class="gallery-item">';
+            echo '<img src="' . $image . '" class="gallery-image" alt="Graphic Design Work">';
+            echo '</div>';
+        }
+        ?>
+    </div>
+    <!-- Add more gallery items as needed -->
+
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <span class="close" onclick="closeLightbox()">&times;</span>
+        <img class="lightbox-content" id="lightbox-img" alt="Enlarged Design">
+    </div>
+
+    <script>
+        // Open Lightbox
+        function openLightbox(src) {
+            document.getElementById("lightbox").style.display = "flex";
+            document.getElementById("lightbox-img").src = src;
+        }
+
+        // Close Lightbox
+        function closeLightbox() {
+            document.getElementById("lightbox").style.display = "none";
+        }
+
+        // Add Event Listeners to Gallery Images
+        const images = document.querySelectorAll(".gallery-image");
+        images.forEach(img => {
+            img.addEventListener("click", () => openLightbox(img.src));
+        });
+    </script>
+</div>
